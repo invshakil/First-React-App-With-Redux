@@ -1,15 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {NavLink} from 'react-router-dom'
 import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 const header = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [app] = useState({
+    const app = {
         'name': 'React App',
         'version': 'v0.1'
-    })
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [navs] = useState([
+    }
+    const navs = [
         {name: "Create Data", to: '/create'},
         {name: "List Data", to: '/list'},
         {
@@ -18,7 +16,7 @@ const header = () => {
                 {name: "Categories", 'to': '/categories'}
             ]
         }
-    ])
+    ]
 
     let navigationLinks = navs.map((item, index) => {
         if (item.subLinks !== undefined && item.subLinks.length) {
@@ -45,16 +43,15 @@ const header = () => {
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand href="#">{app.name} {app.version}</Navbar.Brand>
+            <Navbar.Brand as={NavLink} to="/">{app.name} {app.version}</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                     {navigationLinks}
                 </Nav>
                 <Nav>
-                    <Nav.Link href="#deets">More deets</Nav.Link>
-                    <Nav.Link eventKey={2} href="#memes">
-                        Dank memes
+                    <Nav.Link as={NavLink} to='/settings'>
+                        Settings
                     </Nav.Link>
                 </Nav>
             </Navbar.Collapse>
