@@ -3,7 +3,7 @@ import {Form} from "react-bootstrap";
 import InfoTextBox from "./InfoText";
 
 const TextField = React.forwardRef(
-    ({label, rules, infoText, errorMessage, ...restProps}, ref) => {
+    ({label, infoText, errorMessage, ...restProps}, ref) => {
         const hasErrorMessage = (errorMessage !== undefined && errorMessage.length)
         return (
             <Form.Group controlId={'formBasic' + label.split(' ').join('').toUpperCase()}

@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Button, Container, Form, Jumbotron} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import TextField from '../components/inputs/TextField'
+import CheckBox from "../components/inputs/CheckBox";
 import {email} from "../helpers/patterns";
 
 const LoginPage = () => {
@@ -11,12 +12,13 @@ const LoginPage = () => {
     const [form, setForm] = useState({
         email: '',
         password: '',
-        rememberMe: false
+        remember: false
     })
     const handleInput = (event) => {
+        const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
         setForm({
             ...form,
-            [event.target.name]: event.target.value
+            [event.target.name]: value
         });
     }
     const submit = () => {
@@ -52,6 +54,7 @@ const LoginPage = () => {
                                infoText="We'll not use this information other than authentication"
                                ref={emailValidation}
                                errorMessage={errors.email && errors.email.message}
+                               value={form.email}
                                onChange={handleInput}
                     />
 
@@ -61,12 +64,15 @@ const LoginPage = () => {
                                placeholder="*******"
                                ref={passwordValidation}
                                errorMessage={errors.password && errors.password.message}
+                               value={form.password}
                                onChange={handleInput}
                     />
 
-                    <Form.Group controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Remember me"/>
-                    </Form.Group>
+                    <CheckBox label="Remember Me"
+                              name="remember"
+                              checked={form.remember}
+                              onChange={handleInput}
+                    />
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
