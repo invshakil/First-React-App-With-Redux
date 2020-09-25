@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom'
 import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 
-const header = () => {
+const Header = () => {
     const app = {
         'name': 'React App',
         'version': 'v0.1'
@@ -58,4 +58,4 @@ const header = () => {
         </Navbar>
     )
 }
-export default header
+export default Header

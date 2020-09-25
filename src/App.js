@@ -1,22 +1,28 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {Redirect, Route, Router, Switch} from 'react-router-dom'
+import {createBrowserHistory} from "history";
 import {Provider} from 'react-redux'
-import store from './store'
-// import Header from "./components/Layouts/Header";
 import LoginPage from "./views/LoginPage";
-import Categories from "./views/categories";
+import AdminPage from "./views/AdminPage";
+// Redux Store
+import store from './store'
+
+//Styles
 import './App.css'
 import './styles/index.scss'
+
+const history = createBrowserHistory();
 
 function App() {
     return (
         <div className="App">
             <Provider store={store}>
-                <Router>
+                <Router history={history}>
                     <Switch>
-                        <Route path="/" component={LoginPage}/>
-                        <Route exact path="/categories" component={Categories}/>
+                        <Route path="/login" component={LoginPage}/>
+                        <Route path="/admin" component={AdminPage}/>
                         <Route exact path="*" component={NotFound}/>
+                        <Redirect from="/" to="/login"/>
                     </Switch>
                 </Router>
             </Provider>

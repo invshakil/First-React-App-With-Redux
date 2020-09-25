@@ -1,0 +1,10 @@
+.has-error {
+  input {
+    border: 1px solid $danger;
+  }
+
+  .error, label {
+    color: $danger;
+    font-size: $smallFontSize;
+  }
+}
