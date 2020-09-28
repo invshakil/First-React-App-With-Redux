@@ -3,10 +3,11 @@ import Categories from "./views/categories";
 
 const dashboardRoutes = [
     {
-        path: "/dashboard",
+        path: "/",
         name: "Dashboard",
         component: Dashboard,
-        layout: "/admin"
+        layout: "/admin",
+        exact: true
     },
     {
         path: "/categories",

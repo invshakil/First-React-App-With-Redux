@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useHistory } from 'react-router-dom';
 import {Button, Container, Form, Jumbotron} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import TextField from '../components/inputs/TextField'
@@ -6,6 +7,7 @@ import CheckBox from "../components/inputs/CheckBox";
 import {email} from "../helpers/patterns";
 
 const LoginPage = () => {
+    const history = useHistory()
     const {register, errors, handleSubmit} = useForm({
         mode: "onChange"
     });
@@ -22,7 +24,7 @@ const LoginPage = () => {
         });
     }
     const submit = () => {
-        console.log(form)
+       history.push('/admin')
     }
 
     // Validations for inputs

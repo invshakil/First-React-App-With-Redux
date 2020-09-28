@@ -2,7 +2,9 @@ import React from "react";
 
 const Dashboard = () => {
     return (
-        'Welcome to dashboard!'
+        <>
+            Welcome to dashboard!
+        </>
     )
 }
 

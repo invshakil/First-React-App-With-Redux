@@ -8,12 +8,12 @@ const Header = () => {
         'version': 'v0.1'
     }
     const navs = [
-        {name: "Create Data", to: '/create'},
-        {name: "List Data", to: '/list'},
+        {name: "Create Post", to: '/admin/post/create'},
+        {name: "Manage Post", to: '/admin/post/manage'},
         {
             name: "Dependency",
             subLinks: [
-                {name: "Categories", 'to': '/categories'}
+                {name: "Categories", 'to': '/admin/categories'}
             ]
         }
     ]
@@ -43,7 +43,7 @@ const Header = () => {
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand as={NavLink} to="/">{app.name} {app.version}</Navbar.Brand>
+            <Navbar.Brand as={NavLink} to="/admin">{app.name} {app.version}</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
