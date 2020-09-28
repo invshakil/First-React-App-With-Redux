@@ -2,11 +2,12 @@ import {ADD, SET_FILTER, TOGGLE} from "./actionTypes";
 
 let id = 0;
 
-export const addCategory = name => ({
+export const addCategory = payload => ({
     type: ADD,
     payload: {
         id: ++id,
-        name
+        name: payload.name,
+        enabled: payload.enabled
     }
 });
 

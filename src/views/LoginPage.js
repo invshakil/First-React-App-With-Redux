@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {Button, Container, Form, Jumbotron} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import TextField from '../components/inputs/TextField'
@@ -24,7 +24,7 @@ const LoginPage = () => {
         });
     }
     const submit = () => {
-       history.push('/admin')
+        history.push('/admin')
     }
 
     // Validations for inputs
@@ -48,37 +48,39 @@ const LoginPage = () => {
         <Container className="loginPageWrapper">
             <Jumbotron className="formWrapper">
                 <h3 className="my-auto text-center">Login Page</h3>
-                <Form onSubmit={handleSubmit(submit)}>
-                    <TextField name="email"
-                               type="email"
-                               label="Email Address"
-                               placeholder="Enter your email address"
-                               infoText="We'll not use this information other than authentication"
-                               ref={emailValidation}
-                               errorMessage={errors.email && errors.email.message}
-                               value={form.email}
-                               onChange={handleInput}
-                    />
+                <div className="categoryForm">
+                    <Form onSubmit={handleSubmit(submit)}>
+                        <TextField name="email"
+                                   type="email"
+                                   label="Email Address"
+                                   placeholder="Enter your email address"
+                                   infoText="We'll not use this information other than authentication"
+                                   ref={emailValidation}
+                                   errorMessage={errors.email && errors.email.message}
+                                   value={form.email}
+                                   onChange={handleInput}
+                        />
 
-                    <TextField name="password"
-                               type="password"
-                               label="Password"
-                               placeholder="*******"
-                               ref={passwordValidation}
-                               errorMessage={errors.password && errors.password.message}
-                               value={form.password}
-                               onChange={handleInput}
-                    />
+                        <TextField name="password"
+                                   type="password"
+                                   label="Password"
+                                   placeholder="*******"
+                                   ref={passwordValidation}
+                                   errorMessage={errors.password && errors.password.message}
+                                   value={form.password}
+                                   onChange={handleInput}
+                        />
 
-                    <CheckBox label="Remember Me"
-                              name="remember"
-                              checked={form.remember}
-                              onChange={handleInput}
-                    />
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
+                        <CheckBox label="Remember Me"
+                                  name="remember"
+                                  checked={form.remember}
+                                  onChange={handleInput}
+                        />
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                </div>
             </Jumbotron>
         </Container>
     )

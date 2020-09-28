@@ -8,7 +8,7 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case ADD: {
-            const {id, name} = action.payload;
+            const {id, name, enabled} = action.payload;
             return {
                 ...state,
                 allIds: [...state.allIds, id],
@@ -16,7 +16,7 @@ export default function (state = initialState, action) {
                     ...state.byIds,
                     [id]: {
                         name,
-                        enabled: false
+                        enabled: enabled
                     }
                 }
             };
