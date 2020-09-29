@@ -9,9 +9,8 @@ const Category = ({category, toggleCategory}) => {
         const isEnabled = event.target.checked;
         await toggleCategory({
             id: category.id,
-            enabled: isEnabled
+            isEnabled: isEnabled
         })
-        category.enabled = isEnabled
     }
     return (
         <Card style={{width: '18rem'}}>

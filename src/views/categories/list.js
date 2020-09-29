@@ -5,7 +5,9 @@ import {getCategoriesByVisibilityFilter} from "../../store/selectors/categorySel
 import {Col, Row} from "react-bootstrap";
 import Filter from "./filter";
 
+let render = 1;
 const CategoryList = ({categories}) => {
+    render++
     return (
         <div>
             <div className="filterArea">
@@ -14,14 +16,17 @@ const CategoryList = ({categories}) => {
 
             <Row>
                 {categories && categories.length ?
-                    categories.map((category) => {
+                    categories.map((category, index) => {
+                        const key = `${render}${index}`
                         return (
-                            <Col md={4} key={`category-${category.id}`} className="category-card">
-                                <Details key={`category-${category.id}`} category={category} className="category"/>
+                            <Col md={4} key={`category-${key}`} className="category-card">
+                                <Details key={`category-${key}`} category={category}
+                                         className="category"/>
                             </Col>
                         );
                     })
-                    : "No Categories found"
+                    :
+                    <Col>No Categories found</Col>
                 }
             </Row>
         </div>
