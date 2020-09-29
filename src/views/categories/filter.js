@@ -1,10 +1,10 @@
 import React from "react";
 import cx from "classnames";
-import { connect } from "react-redux";
-import { setFilter } from "../../store/actions/categoryActions";
-import { VISIBILITY_FILTERS } from "../../helpers/constants";
+import {connect} from "react-redux";
+import {setFilter} from "../../store/actions/categoryActions";
+import {VISIBILITY_FILTERS} from "../../helpers/constants";
 
-const VisibilityFilters = ({ activeFilter, setFilter }) => {
+const VisibilityFilters = ({activeFilter, setFilter}) => {
     return (
         <div className="visibility-filters">
             {Object.keys(VISIBILITY_FILTERS).map(filterKey => {
@@ -29,10 +29,10 @@ const VisibilityFilters = ({ activeFilter, setFilter }) => {
 };
 
 const mapStateToProps = state => {
-    return { activeFilter: state.visibilityFilter };
+    return {activeFilter: state.visibilityFilter};
 };
 // export default VisibilityFilters;
 export default connect(
     mapStateToProps,
-    { setFilter }
+    {setFilter}
 )(VisibilityFilters);

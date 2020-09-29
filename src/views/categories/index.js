@@ -1,7 +1,6 @@
 import React from "react";
 import Add from "./add";
 import List from "./list";
-import Filter from "./filter";
 
 export default function Categories() {
     return (
@@ -9,7 +8,6 @@ export default function Categories() {
             <h1>Category List</h1>
             <Add/>
             <List/>
-            <Filter/>
         </div>
     );
 }

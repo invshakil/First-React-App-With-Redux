@@ -11,9 +11,9 @@ export const addCategory = payload => ({
     }
 });
 
-export const toggleCategory = id =>  ({
+export const toggleCategory = ({id, isEnabled}) => ({
     type: TOGGLE,
-    payload: {id}
+    payload: {id, isEnabled}
 });
 
 export const setFilter = filter => ({

@@ -2,16 +2,29 @@ import React from "react";
 import {connect} from "react-redux";
 import Details from "./details";
 import {getCategoriesByVisibilityFilter} from "../../store/selectors/categorySelectors";
+import {Col, Row} from "react-bootstrap";
+import Filter from "./filter";
 
 const CategoryList = ({categories}) => {
     return (
-        <ul className="todo-list">
-            {categories && categories.length
-                ? categories.map((category, index) => {
-                    return <Details key={`category-${category.id}`} category={category}/>;
-                })
-                : "No Categories Created!"}
-        </ul>
+        <div>
+            <div className="filterArea">
+                <Filter/>
+            </div>
+
+            <Row>
+                {categories && categories.length ?
+                    categories.map((category) => {
+                        return (
+                            <Col md={4} key={`category-${category.id}`} className="category-card">
+                                <Details key={`category-${category.id}`} category={category} className="category"/>
+                            </Col>
+                        );
+                    })
+                    : "No Categories found"
+                }
+            </Row>
+        </div>
     )
 };
 

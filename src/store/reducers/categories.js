@@ -17,10 +17,10 @@ export default function (state = initialState, action) {
             ];
         }
         case TOGGLE: {
-            const {id} = action.payload;
+            const {id, isEnabled} = action.payload;
             return state.map(item => {
                 if (item.id === id) {
-                    item.enabled = !item.enabled
+                    item.enabled = isEnabled
                 }
                 return item
             });
