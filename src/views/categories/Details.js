@@ -14,7 +14,7 @@ const Category = ({category, toggleCategory}) => {
     }
     return (
         <Card style={{width: '18rem'}}>
-            <ListGroup variant="flush">
+            <ListGroup variant="flush" activeKey={category.id}>
                 <ListGroup.Item>{category.name}</ListGroup.Item>
                 <ListGroup.Item>{category.enabled ? '✅ Enabled' : '❎ Disabled'}</ListGroup.Item>
                 <ListGroup.Item>

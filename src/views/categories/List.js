@@ -1,9 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
-import Details from "./details";
 import {getCategoriesByVisibilityFilter} from "../../store/selectors/categorySelectors";
 import {Col, Row} from "react-bootstrap";
-import Filter from "./filter";
+import Details from "./Details";
+import Filter from "./Filter";
 
 let render = 1;
 const CategoryList = ({categories}) => {

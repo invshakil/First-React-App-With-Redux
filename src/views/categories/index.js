@@ -1,12 +1,12 @@
 import React from "react";
-import Add from "./add";
-import List from "./list";
+import Form from "./Form";
+import List from "./List";
 
 export default function Categories() {
     return (
         <div className="todo-app">
             <h1>Category List</h1>
-            <Add/>
+            <Form/>
             <List/>
         </div>
     );
