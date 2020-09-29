@@ -1,29 +1,22 @@
-import React, {useState} from "react";
-import {useHistory} from 'react-router-dom';
+import React from "react";
 import {Button, Container, Form, Jumbotron} from "react-bootstrap";
 import {useForm} from "react-hook-form";
+import {useHistory} from 'react-router-dom'
 import TextField from '../components/inputs/TextField'
 import CheckBox from "../components/inputs/CheckBox";
 import {email} from "../helpers/patterns";
 
 const LoginPage = () => {
     const history = useHistory()
-    const {register, errors, handleSubmit} = useForm({
+    const {register, errors, handleSubmit, setValue} = useForm({
         mode: "onChange"
     });
-    const [form, setForm] = useState({
-        email: '',
-        password: '',
-        remember: false
-    })
     const handleInput = (event) => {
         const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
-        setForm({
-            ...form,
-            [event.target.name]: value
-        });
+        setValue('remember', value);
     }
-    const submit = () => {
+    const submit = (data) => {
+        console.log(data)
         history.push('/admin')
     }
 
@@ -57,8 +50,6 @@ const LoginPage = () => {
                                    infoText="We'll not use this information other than authentication"
                                    ref={emailValidation}
                                    errorMessage={errors.email && errors.email.message}
-                                   value={form.email}
-                                   onChange={handleInput}
                         />
 
                         <TextField name="password"
@@ -67,14 +58,13 @@ const LoginPage = () => {
                                    placeholder="*******"
                                    ref={passwordValidation}
                                    errorMessage={errors.password && errors.password.message}
-                                   value={form.password}
-                                   onChange={handleInput}
                         />
 
                         <CheckBox label="Remember Me"
                                   name="remember"
-                                  checked={form.remember}
+                                  defaultChecked={false}
                                   onChange={handleInput}
+                                  ref={register}
                         />
                         <Button variant="primary" type="submit">
                             Submit

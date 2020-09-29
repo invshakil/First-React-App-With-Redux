@@ -5,10 +5,10 @@ import {Card, ListGroup} from "react-bootstrap";
 import CheckBox from "../../components/inputs/CheckBox";
 
 const Category = ({category, toggleCategory}) => {
-    const handleChange = async (event) => {
+    const handleChange = (categoryId) => async (event) => {
         const isEnabled = event.target.checked;
         await toggleCategory({
-            id: category.id,
+            id: categoryId,
             isEnabled: isEnabled
         })
     }
@@ -20,7 +20,7 @@ const Category = ({category, toggleCategory}) => {
                 <ListGroup.Item>
                     <CheckBox label={category.enabled ? 'Disable' : 'Enable'}
                               defaultChecked={category.enabled}
-                              onChange={handleChange}
+                              onChange={handleChange(category.id)}
                     />
                 </ListGroup.Item>
             </ListGroup>
