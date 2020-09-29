@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addCategory} from "../../store/actions";
+import {addCategory} from "../../store/actions/categoryActions";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import TextField from "../../components/inputs/TextField";
 import CheckBox from "../../components/inputs/CheckBox";

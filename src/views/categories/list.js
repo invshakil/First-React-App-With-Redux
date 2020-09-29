@@ -1,17 +1,19 @@
 import React from "react";
 import {connect} from "react-redux";
 import Details from "./details";
-import {getCategoriesByVisibilityFilter} from "../../store/selectors";
+import {getCategoriesByVisibilityFilter} from "../../store/selectors/categorySelectors";
 
-const CategoryList = ({categories}) => (
-    <ul className="todo-list">
-        {categories && categories.length
-            ? categories.map((category, index) => {
-                return <Details key={`category-${category.id}`} category={category}/>;
-            })
-            : "No Categories Created!"}
-    </ul>
-);
+const CategoryList = ({categories}) => {
+    return (
+        <ul className="todo-list">
+            {categories && categories.length
+                ? categories.map((category, index) => {
+                    return <Details key={`category-${category.id}`} category={category}/>;
+                })
+                : "No Categories Created!"}
+        </ul>
+    )
+};
 
 const mapStateToProps = state => {
     const {visibilityFilter} = state;

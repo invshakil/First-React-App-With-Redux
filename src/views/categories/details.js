@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import cx from "classnames";
-import {toggleCategory} from "../../store/actions";
+import {toggleCategory} from "../../store/actions/categoryActions";
 
 const Category = ({ category, toggleCategory }) => {
 

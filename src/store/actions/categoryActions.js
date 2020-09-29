@@ -1,7 +1,7 @@
-import {ADD, SET_FILTER, TOGGLE} from "./actionTypes";
+import {ADD, SET_FILTER, TOGGLE} from "../actionTypes";
+import {getCategories} from "../selectors/categorySelectors";
 
-let id = 0;
-
+let id = getCategories.length + 1;
 export const addCategory = payload => ({
     type: ADD,
     payload: {
