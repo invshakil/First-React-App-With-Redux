@@ -8,7 +8,10 @@ const CheckBox = React.forwardRef(
 
         return (
             <Form.Group controlId={'formBasic' + label.split(' ').join('').toUpperCase()}>
-                <Form.Check type="checkbox" label={label} {...restProps} ref={ref} id={Math.random()} />
+                <Form.Check type="checkbox"
+                            label={label} {...restProps}
+                            ref={ref} id={Math.random()}
+                            key={Math.random()}/>
 
                 {
                     hasErrorMessage &&

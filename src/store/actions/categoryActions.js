@@ -1,4 +1,4 @@
-import {ADD, SET_FILTER, TOGGLE} from "../actionTypes";
+import {ADD, SET_FILTER, SET_ID, TOGGLE} from "../actionTypes";
 import {getCategories} from "../selectors/categorySelectors";
 
 let id = getCategories.length + 1;
@@ -15,6 +15,11 @@ export const toggleCategory = ({id, isEnabled}) => ({
     type: TOGGLE,
     payload: {id, isEnabled}
 });
+
+export const setCategoryId = categoryId => ({
+    type: SET_ID,
+    payload: categoryId
+})
 
 export const setFilter = filter => ({
     type: SET_FILTER,

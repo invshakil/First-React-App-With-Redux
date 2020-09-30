@@ -1,20 +1,36 @@
-import React from "react";
-import {useDispatch} from "react-redux";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {addCategory} from "../../store/actions/categoryActions";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import TextField from "../../components/inputs/TextField";
 import CheckBox from "../../components/inputs/CheckBox";
 import {useForm} from "react-hook-form";
+import {getCategoryById} from "../../store/selectors/categorySelectors";
 
 const AddCategory = () => {
+    const [category, setCategory] = useState({
+        id: null,
+        name: '',
+        enabled: false
+    })
     const dispatch = useDispatch()
     const {register, errors, handleSubmit, reset} = useForm({
         mode: "onChange"
     });
     const submit = (data) => {
-        dispatch(addCategory(data))
+        if (category.id) {
+            console.log(data)
+        } else {
+            dispatch(addCategory(data))
+        }
         reset()
     }
+    useSelector(async (state) => {
+        if (state.categories.editId) {
+            const categoryInf = await getCategoryById(state, state.categories.editId)
+            setCategory(categoryInf)
+        }
+    })
 
     // Validations for inputs
     const nameValidation = register({
@@ -38,6 +54,7 @@ const AddCategory = () => {
                                type="name"
                                label="Category Name"
                                placeholder="Enter category name"
+                               defaultValue={category.name}
                                ref={nameValidation}
                                errorMessage={errors.name && errors.name.message}
                     />
@@ -48,6 +65,7 @@ const AddCategory = () => {
                     <br/>
                     <CheckBox label="Published"
                               name="enabled"
+                              defaultChecked={category.enabled}
                               ref={register}
                     />
                 </Col>

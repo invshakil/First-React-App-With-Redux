@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {toggleCategory} from "../../store/actions/categoryActions";
-import {Card, ListGroup} from "react-bootstrap";
+import {setCategoryId, toggleCategory} from "../../store/actions/categoryActions";
+import {Button, Card, ListGroup} from "react-bootstrap";
 import CheckBox from "../../components/inputs/CheckBox";
 
 const Category = ({category}) => {
@@ -13,6 +13,9 @@ const Category = ({category}) => {
             isEnabled: isEnabled
         }))
     }
+    const handleEditClick = async () => {
+        await dispatch(setCategoryId(category.id))
+    }
     return (
         <Card style={{width: '18rem'}}>
             <ListGroup variant="flush" activeKey={category.id}>
@@ -23,6 +26,9 @@ const Category = ({category}) => {
                               defaultChecked={category.enabled}
                               onChange={handleChange(category.id)}
                     />
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <Button variant="danger" onClick={handleEditClick}>Edit</Button>
                 </ListGroup.Item>
             </ListGroup>
         </Card>
