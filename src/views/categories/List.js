@@ -1,13 +1,17 @@
 import React from "react";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import {getCategoriesByVisibilityFilter} from "../../store/selectors/categorySelectors";
 import {Col, Row} from "react-bootstrap";
 import Details from "./Details";
 import Filter from "./Filter";
 
 let render = 1;
-const CategoryList = ({categories}) => {
+const CategoryList = () => {
     render++
+    const categories = useSelector((state) => {
+        const {visibilityFilter} = state;
+        return getCategoriesByVisibilityFilter(state, visibilityFilter)
+    })
     return (
         <div>
             <div className="filterArea">
@@ -33,10 +37,4 @@ const CategoryList = ({categories}) => {
     )
 };
 
-const mapStateToProps = state => {
-    const {visibilityFilter} = state;
-    const categories = getCategoriesByVisibilityFilter(state, visibilityFilter);
-    return {categories};
-};
-// export default TodoList;
-export default connect(mapStateToProps)(CategoryList);
+export default CategoryList;

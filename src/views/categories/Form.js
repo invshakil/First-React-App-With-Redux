@@ -1,17 +1,19 @@
 import React from "react";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import {addCategory} from "../../store/actions/categoryActions";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import TextField from "../../components/inputs/TextField";
 import CheckBox from "../../components/inputs/CheckBox";
 import {useForm} from "react-hook-form";
 
-const AddCategory = (props) => {
-    const {register, errors, handleSubmit} = useForm({
+const AddCategory = () => {
+    const dispatch = useDispatch()
+    const {register, errors, handleSubmit, reset} = useForm({
         mode: "onChange"
     });
     const submit = (data) => {
-        props.addCategory(data)
+        dispatch(addCategory(data))
+        reset()
     }
 
     // Validations for inputs
@@ -62,7 +64,4 @@ const AddCategory = (props) => {
     );
 }
 
-export default connect(
-    null,
-    {addCategory}
-)(AddCategory);
+export default AddCategory

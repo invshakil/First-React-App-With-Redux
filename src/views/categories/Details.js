@@ -1,16 +1,17 @@
 import React from "react";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import {toggleCategory} from "../../store/actions/categoryActions";
 import {Card, ListGroup} from "react-bootstrap";
 import CheckBox from "../../components/inputs/CheckBox";
 
-const Category = ({category, toggleCategory}) => {
+const Category = ({category}) => {
+    const dispatch = useDispatch()
     const handleChange = (categoryId) => async (event) => {
         const isEnabled = event.target.checked;
-        await toggleCategory({
+        await dispatch(toggleCategory({
             id: categoryId,
             isEnabled: isEnabled
-        })
+        }))
     }
     return (
         <Card style={{width: '18rem'}}>
@@ -28,8 +29,4 @@ const Category = ({category, toggleCategory}) => {
     )
 };
 
-// export default Category;
-export default connect(
-    null,
-    {toggleCategory}
-)(Category);
+export default Category;
