@@ -1,36 +1,41 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addCategory} from "../../store/actions/categoryActions";
+import {addCategory, updateCategory} from "../../store/actions/categoryActions";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import TextField from "../../components/inputs/TextField";
 import CheckBox from "../../components/inputs/CheckBox";
 import {useForm} from "react-hook-form";
 import {getCategoryById} from "../../store/selectors/categorySelectors";
 
+const initial = {
+    id: null,
+    name: '',
+    enabled: false
+}
+
 const AddCategory = () => {
-    const [category, setCategory] = useState({
-        id: null,
-        name: '',
-        enabled: false
-    })
+    const [category, setCategory] = useState(initial)
     const dispatch = useDispatch()
     const {register, errors, handleSubmit, reset} = useForm({
         mode: "onChange"
     });
-    const submit = (data) => {
-        if (category.id) {
-            console.log(data)
-        } else {
-            dispatch(addCategory(data))
-        }
-        reset()
-    }
+
     useSelector(async (state) => {
-        if (state.categories.editId) {
-            const categoryInf = await getCategoryById(state, state.categories.editId)
+        const categoryInf = await getCategoryById(state, state.categories.editId)
+        if (categoryInf) {
             setCategory(categoryInf)
         }
     })
+
+    const submit = async (data) => {
+        if (category.id) {
+            data.id = category.id
+            await dispatch(updateCategory(data))
+        } else {
+            await dispatch(addCategory(data))
+        }
+        await reset(initial)
+    }
 
     // Validations for inputs
     const nameValidation = register({
@@ -44,7 +49,6 @@ const AddCategory = () => {
             )
         }
     });
-
 
     return (
         <Form onSubmit={handleSubmit(submit)}>

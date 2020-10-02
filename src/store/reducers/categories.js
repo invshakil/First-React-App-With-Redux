@@ -1,4 +1,4 @@
-import {ADD, SET_ID, TOGGLE} from "../actionTypes";
+import {ADD, SET_ID, TOGGLE, UPDATE} from "../actionTypes";
 
 let categories = localStorage.getItem("categories");
 if (categories === null) {
@@ -37,15 +37,15 @@ export default function (state = initialState, action) {
             const {id, isEnabled} = action.payload;
             return {
                 ...state,
-                data: [
-                    ...state.data.map(item => {
-                        if (item.id === id) {
-                            item.enabled = isEnabled
-                        }
-                        return item
-                    })
-                ]
+                data: state.data.map(item => item.id === id ? {...item, enabled: isEnabled} : item)
             };
+        }
+        case UPDATE: {
+            const {id, name, enabled} = action.payload
+            return {
+                ...state,
+                data: state.data.map(category => category.id === id ? {id, name, enabled} : category)
+            }
         }
         default:
             return state;

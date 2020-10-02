@@ -3,7 +3,6 @@ import {useSelector} from "react-redux";
 import {getCategoriesByVisibilityFilter} from "../../store/selectors/categorySelectors";
 import {Col, Row} from "react-bootstrap";
 import Details from "./Details";
-import Filter from "./Filter";
 
 let render = 1;
 const CategoryList = () => {
@@ -14,10 +13,6 @@ const CategoryList = () => {
     })
     return (
         <div>
-            <div className="filterArea">
-                <Filter/>
-            </div>
-
             <Row>
                 {categories && categories.length ?
                     categories.map((category, index) => {
