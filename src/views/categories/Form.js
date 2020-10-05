@@ -14,7 +14,7 @@ const CategoryForm = (props) => {
     });
     const categoryInfo = props.category;
     const submit = async (data, e) => {
-        if (categoryInfo.id) {
+        if (categoryInfo !== null) {
             data.id = categoryInfo.id
             await dispatch(updateCategory(data))
         } else {

@@ -1,14 +1,7 @@
 import {ADD, SET_ID, TOGGLE, UPDATE} from "../actionTypes";
 
-let categories = localStorage.getItem("categories");
-if (categories === null) {
-    categories = [
-        {id: 1, name: "Sports", enabled: true},
-        {id: 2, name: "Draft", enabled: false},
-    ];
-}
 const initialState = {
-    data: categories,
+    data: [],
     editId: null
 }
 

@@ -1,11 +1,10 @@
 import {ADD, SET_FILTER, SET_ID, TOGGLE, UPDATE} from "../actionTypes";
-import {getCategories} from "../selectors/categorySelectors";
+import {v4} from "node-uuid"
 
-let id = getCategories.length + 1;
 export const addCategory = payload => ({
     type: ADD,
     payload: {
-        id: ++id,
+        id: v4(),
         name: payload.name,
         enabled: payload.enabled
     }
