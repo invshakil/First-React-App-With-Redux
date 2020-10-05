@@ -43,8 +43,8 @@ export default function (state = initialState, action) {
         case UPDATE: {
             const {id, name, enabled} = action.payload
             return {
-                ...state,
-                data: state.data.map(category => category.id === id ? {id, name, enabled} : category)
+                data: state.data.map(category => category.id === id ? {id, name, enabled} : category),
+                editId: null
             }
         }
         default:

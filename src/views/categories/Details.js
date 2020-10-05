@@ -25,6 +25,7 @@ const Category = ({category}) => {
                     <CheckBox label={category.enabled ? 'Disable' : 'Enable'}
                               defaultChecked={category.enabled}
                               onChange={handleChange(category.id)}
+                              id={'checkbox' + category.id}
                     />
                 </ListGroup.Item>
                 <ListGroup.Item>

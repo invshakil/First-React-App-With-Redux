@@ -1,41 +1,31 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect} from "react";
+import {useDispatch} from "react-redux";
 import {addCategory, updateCategory} from "../../store/actions/categoryActions";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import TextField from "../../components/inputs/TextField";
 import CheckBox from "../../components/inputs/CheckBox";
 import {useForm} from "react-hook-form";
-import {getCategoryById} from "../../store/selectors/categorySelectors";
 
-const initial = {
-    id: null,
-    name: '',
-    enabled: false
-}
 
-const AddCategory = () => {
-    const [category, setCategory] = useState(initial)
+const CategoryForm = (props) => {
     const dispatch = useDispatch()
     const {register, errors, handleSubmit, reset} = useForm({
         mode: "onChange"
     });
-
-    useSelector(async (state) => {
-        const categoryInf = await getCategoryById(state, state.categories.editId)
-        if (categoryInf) {
-            setCategory(categoryInf)
-        }
-    })
-
-    const submit = async (data) => {
-        if (category.id) {
-            data.id = category.id
+    const categoryInfo = props.category;
+    const submit = async (data, e) => {
+        if (categoryInfo.id) {
+            data.id = categoryInfo.id
             await dispatch(updateCategory(data))
         } else {
             await dispatch(addCategory(data))
         }
-        await reset(initial)
+
+        e.target.reset()
     }
+    useEffect(() => {
+        reset(categoryInfo)
+    }, [categoryInfo, reset])
 
     // Validations for inputs
     const nameValidation = register({
@@ -58,9 +48,10 @@ const AddCategory = () => {
                                type="name"
                                label="Category Name"
                                placeholder="Enter category name"
-                               defaultValue={category.name}
+                               defaultValue={categoryInfo !== null ? categoryInfo.name : ''}
                                ref={nameValidation}
                                errorMessage={errors.name && errors.name.message}
+                               id={'category-name'}
                     />
                 </Col>
 
@@ -69,8 +60,9 @@ const AddCategory = () => {
                     <br/>
                     <CheckBox label="Published"
                               name="enabled"
-                              defaultChecked={category.enabled}
+                              defaultChecked={categoryInfo !== null ? categoryInfo.enabled : false}
                               ref={register}
+                              id={'category-enabled'}
                     />
                 </Col>
 
@@ -86,4 +78,4 @@ const AddCategory = () => {
     );
 }
 
-export default AddCategory
+export default React.memo(CategoryForm)

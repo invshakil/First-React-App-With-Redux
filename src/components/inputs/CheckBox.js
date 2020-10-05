@@ -5,13 +5,13 @@ import InfoTextBox from "./InfoText";
 const CheckBox = React.forwardRef(
     ({label, errorMessage, ...restProps}, ref) => {
         const hasErrorMessage = (errorMessage !== undefined && errorMessage.length)
-        const labelUpperCase = label.split(' ').join('').toUpperCase()
         return (
-            <Form.Group controlId={'formBasic' + labelUpperCase} id={labelUpperCase}>
+            <Form.Group>
                 <Form.Check type="checkbox"
                             label={label}
                             ref={ref}
                             {...restProps}
+                            key={label}
                 />
 
                 {
@@ -22,4 +22,4 @@ const CheckBox = React.forwardRef(
         )
     }
 )
-export default CheckBox
+export default React.memo(CheckBox)
