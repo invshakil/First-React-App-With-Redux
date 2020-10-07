@@ -1,4 +1,4 @@
-import {ADD, SET_FILTER, SET_ID, TOGGLE, UPDATE} from "../actionTypes";
+import {ADD, DELETE, SET_FILTER, SET_ID, TOGGLE, UPDATE} from "../actionTypes";
 import {v4} from "node-uuid"
 
 export const addCategory = payload => ({
@@ -22,6 +22,11 @@ export const setCategoryId = categoryId => ({
 
 export const updateCategory = payload => ({
     type: UPDATE,
+    payload
+})
+
+export const deleteCategory = payload => ({
+    type: DELETE,
     payload
 })
 

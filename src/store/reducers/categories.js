@@ -1,4 +1,4 @@
-import {ADD, SET_ID, TOGGLE, UPDATE} from "../actionTypes";
+import {ADD, DELETE, SET_ID, TOGGLE, UPDATE} from "../actionTypes";
 
 const initialState = {
     data: [],
@@ -37,6 +37,13 @@ export default function (state = initialState, action) {
             const {id, name, enabled} = action.payload
             return {
                 data: state.data.map(category => category.id === id ? {id, name, enabled} : category),
+                editId: null
+            }
+        }
+        case DELETE: {
+            const id = action.payload
+            return {
+                data: state.data.filter(category => category.id !== id),
                 editId: null
             }
         }

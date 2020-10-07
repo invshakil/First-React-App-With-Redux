@@ -1,11 +1,12 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {setCategoryId, toggleCategory} from "../../store/actions/categoryActions";
+import {deleteCategory, setCategoryId, toggleCategory} from "../../store/actions/categoryActions";
 import {Button, Card, ListGroup} from "react-bootstrap";
 import CheckBox from "../../components/inputs/CheckBox";
 
-const Category = ({category}) => {
+const Category = ({category, onDelete}) => {
     const dispatch = useDispatch()
+
     const handleChange = (categoryId) => async (event) => {
         const isEnabled = event.target.checked;
         await dispatch(toggleCategory({
@@ -16,6 +17,16 @@ const Category = ({category}) => {
     const handleEditClick = async () => {
         await dispatch(setCategoryId(category.id))
     }
+
+    const handleDeleteClick = async () => {
+        // eslint-disable-next-line no-restricted-globals
+        const confirmed = confirm('Are you sure?');
+        if (confirmed) {
+            await dispatch(deleteCategory(category.id))
+            onDelete()
+        }
+    }
+
     return (
         <Card style={{width: '18rem'}}>
             <ListGroup variant="flush" activeKey={category.id}>
@@ -28,8 +39,9 @@ const Category = ({category}) => {
                               id={'checkbox' + category.id}
                     />
                 </ListGroup.Item>
-                <ListGroup.Item>
-                    <Button variant="danger" onClick={handleEditClick}>Edit</Button>
+                <ListGroup.Item className={"button-wrapper"}>
+                    <Button variant="warning" size={"sm"} onClick={handleEditClick}>Edit</Button>
+                    <Button variant="danger" size={"sm"} onClick={handleDeleteClick}>Delete</Button>
                 </ListGroup.Item>
             </ListGroup>
         </Card>

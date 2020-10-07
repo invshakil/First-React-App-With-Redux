@@ -1,18 +1,22 @@
 import React, {useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {addCategory, updateCategory} from "../../store/actions/categoryActions";
+import {addCategory, toggleCategory, updateCategory} from "../../store/actions/categoryActions";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import TextField from "../../components/inputs/TextField";
 import CheckBox from "../../components/inputs/CheckBox";
 import {useForm} from "react-hook-form";
+import {setNotificationInfo} from "../../store/actions/notificationAction";
 
 
 const CategoryForm = (props) => {
     const dispatch = useDispatch()
+
     const {register, errors, handleSubmit, reset} = useForm({
         mode: "onChange"
     });
+
     const categoryInfo = props.category;
+
     const submit = async (data, e) => {
         if (categoryInfo !== null) {
             data.id = categoryInfo.id
@@ -22,7 +26,19 @@ const CategoryForm = (props) => {
         }
 
         e.target.reset()
+        await onSave()
     }
+
+    const onSave = async () => {
+        await dispatch(setNotificationInfo({
+            title: 'Save Confirmation',
+            message: 'Category Saved Successfully!',
+            autoHide: true,
+            delay: 3500
+        }))
+        await dispatch(toggleCategory(true))
+    }
+
     useEffect(() => {
         reset(categoryInfo)
     }, [categoryInfo, reset])
