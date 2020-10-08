@@ -1,26 +1,25 @@
 import React from "react";
 import * as PropTypes from "prop-types";
-import {Col, Row, Toast} from "react-bootstrap";
+import {Toast} from "react-bootstrap";
 
 const Notification = ({time, autoHide, delay, title, message, onClose, animation}) => {
     return (
-        <Row>
-            <Col xs={6}>
-                <Toast onClose={() => onClose()} show={true} delay={delay} autohide={autoHide} animation={animation}>
-                    <Toast.Header>
-                        {
-                            title ? <strong className="mr-auto">{title}</strong> : null
-                        }
-                        {
-                            time ? <small>{time}</small> : null
-                        }
-                    </Toast.Header>
+        <div className={'toast-wrapper'}>
+            <Toast onClose={() => onClose()} show={true} delay={autoHide ? delay : null} autohide={autoHide}
+                   animation={animation}>
+                <Toast.Header>
                     {
-                        <Toast.Body>{message}</Toast.Body>
+                        title ? <strong className="mr-auto">{title}</strong> : null
                     }
-                </Toast>
-            </Col>
-        </Row>
+                    {
+                        time ? <small>{time}</small> : null
+                    }
+                </Toast.Header>
+                {
+                    <Toast.Body>{message}</Toast.Body>
+                }
+            </Toast>
+        </div>
     );
 }
 
