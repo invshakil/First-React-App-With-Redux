@@ -8,8 +8,8 @@ const Header = () => {
         'version': 'v0.1'
     }
     const navs = [
-        {name: "Create Post", to: '/admin/post/create'},
-        {name: "Manage Post", to: '/admin/post/manage'},
+        {name: "Create Product", to: '/admin/product/create'},
+        {name: "Manage Product", to: '/admin/product/manage'},
         {
             name: "Dependency",
             subLinks: [
